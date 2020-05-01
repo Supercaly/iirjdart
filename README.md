@@ -1,4 +1,4 @@
-# iirj_dart
+# iirjdart
 
 An IIR filter library written in Dart.
 Highpass, lowpass, bandpass and bandstop as Butterworth, Bessel and Chebyshev Type I/II.
@@ -9,7 +9,7 @@ This library is a porting in Dart of the [famous iirj library by berndporr](http
 
 ## Usage
 
-To use this package add `iirj_dart` as a [dependency in your pubspec.yaml file.](https://flutter.dev/docs/development/packages-and-plugins/using-packages)
+To use this package add `iirjdart` as a [dependency in your pubspec.yaml file.](https://flutter.dev/docs/development/packages-and-plugins/using-packages)
 
 Import the library.
 

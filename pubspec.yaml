@@ -1,8 +1,11 @@
 name: iirjdart
-description: A new Flutter package.
+description: >-
+  An IIR filter library written in Dart.
+  Highpass, lowpass, bandpass and bandstop as Butterworth, Bessel and Chebyshev Type I/II.
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/Supercaly/iirj_dart
+repository: https://github.com/Supercaly/iirj_dart
+issue_tracker: https://github.com/Supercaly/iirj_dart/issues
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
