@@ -1,6 +1,6 @@
 
 import 'package:complex/complex.dart';
-import 'package:iirjdart/complex_pair.dart';
+import 'package:iirjdart/src/complex_pair.dart';
 
 class PoleZeroPair {
   ComplexPair poles;

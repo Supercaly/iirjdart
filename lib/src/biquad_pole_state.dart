@@ -1,6 +1,6 @@
 
 import 'package:complex/complex.dart';
-import 'package:iirjdart/pole_zero_pair.dart';
+import 'package:iirjdart/src/pole_zero_pair.dart';
 
 /// PoleZeroPair with gain factor
 class BiquadPoleState extends PoleZeroPair {

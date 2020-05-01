@@ -1,8 +1,8 @@
 
 import 'dart:math' as math;
 import 'package:complex/complex.dart';
-import 'package:iirjdart/layout_base.dart';
-import 'package:iirjdart/pole_zero_pair.dart';
+import 'package:iirjdart/src/layout_base.dart';
+import 'package:iirjdart/src/pole_zero_pair.dart';
 
 /// Transforms from an analogue lowpass filter to a digital highpass filter
 class HighPassTransform {

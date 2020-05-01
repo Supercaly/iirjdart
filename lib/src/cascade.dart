@@ -2,13 +2,13 @@
 import 'dart:math' as math;
 
 import 'package:complex/complex.dart';
-import 'package:iirjdart/biquad.dart';
-import 'package:iirjdart/direct_form.dart';
+import 'package:iirjdart/src/biquad.dart';
+import 'package:iirjdart/src/direct_form.dart';
 import 'package:iirjdart/direct_form_1.dart';
 import 'package:iirjdart/direct_form_2.dart';
-import 'package:iirjdart/layout_base.dart';
-import 'package:iirjdart/math_supplement.dart';
-import 'package:iirjdart/pole_zero_pair.dart';
+import 'package:iirjdart/src/layout_base.dart';
+import 'package:iirjdart/src/math_supplement.dart';
+import 'package:iirjdart/src/pole_zero_pair.dart';
 
 /// The mother of all filters. It contains the coefficients of all
 /// filter stages as a sequence of 2nd order filters and the states

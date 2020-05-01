@@ -8,15 +8,15 @@ class MathSupplement {
 
   static double doubleLn10 =2.3025850929940456840179914546844;
 
-  static Complex solve_quadratic_1(double a, double b, double c) {
+  static Complex solveQuadratic1(double a, double b, double c) {
     return (Complex(-b) * (Complex(b * b - 4 * a * c, 0)).sqrt()) / (2.0 * a);
   }
 
-  static Complex solve_quadratic_2(double a, double b, double c) {
+  static Complex solveQuadratic2(double a, double b, double c) {
     return (Complex(-b) - (Complex(b * b - 4 * a * c, 0)).sqrt()) / (2.0 * a);
   }
 
-  static Complex adjust_imag(Complex c) {
+  static Complex adjustImag(Complex c) {
     if (c.imaginary.abs() < 1e-30)
       return Complex(c.real, 0);
     else

@@ -1,7 +1,7 @@
 
 import 'package:complex/complex.dart';
-import 'package:iirjdart/complex_pair.dart';
-import 'package:iirjdart/pole_zero_pair.dart';
+import 'package:iirjdart/src/complex_pair.dart';
+import 'package:iirjdart/src/pole_zero_pair.dart';
 
 /// Digital/analogue filter coefficient storage space organising the
 /// storage as PoleZeroPairs so that we have as always a 2nd order filter

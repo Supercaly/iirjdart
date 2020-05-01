@@ -1,9 +1,9 @@
 
 import 'dart:math' as math;
 import 'package:complex/complex.dart';
-import 'package:iirjdart/biquad_pole_state.dart';
-import 'package:iirjdart/math_supplement.dart';
-import 'package:iirjdart/pole_zero_pair.dart';
+import 'package:iirjdart/src/biquad_pole_state.dart';
+import 'package:iirjdart/src/math_supplement.dart';
+import 'package:iirjdart/src/pole_zero_pair.dart';
 
 /// Contains the coefficients of a 2nd order digital filter with two poles and two zeros
 class Biquad {

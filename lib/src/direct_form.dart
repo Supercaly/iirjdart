@@ -1,5 +1,5 @@
 
-import 'package:iirjdart/biquad.dart';
+import 'package:iirjdart/src/biquad.dart';
 
 /// Abstract form of the a filter which can have different state variables
 ///

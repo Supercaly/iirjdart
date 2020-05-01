@@ -3,14 +3,14 @@ import 'dart:math' as math;
 
 import 'package:complex/fastmath.dart';
 import 'package:complex/complex.dart';
-import 'package:iirjdart/band_pass_transform.dart';
-import 'package:iirjdart/band_stop_transform.dart';
-import 'package:iirjdart/cascade.dart';
-import 'package:iirjdart/direct_form.dart';
-import 'package:iirjdart/high_pass_transform.dart';
-import 'package:iirjdart/layout_base.dart';
-import 'package:iirjdart/low_pass_transform.dart';
-import 'package:iirjdart/math_supplement.dart';
+import 'package:iirjdart/src/band_pass_transform.dart';
+import 'package:iirjdart/src/band_stop_transform.dart';
+import 'package:iirjdart/src/cascade.dart';
+import 'package:iirjdart/src/direct_form.dart';
+import 'package:iirjdart/src/high_pass_transform.dart';
+import 'package:iirjdart/src/layout_base.dart';
+import 'package:iirjdart/src/low_pass_transform.dart';
+import 'package:iirjdart/src/math_supplement.dart';
 
 class _AnalogLowPass extends LayoutBase {
   int nPoles;
