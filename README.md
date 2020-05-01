@@ -46,3 +46,7 @@ v = butterworth.filter(v)
 ## Coding examples
 See the `test/*_test.dart` files for complete examples
 for all filter types.
+
+## ToDo
+
+- [ ] Add Bessel filter
