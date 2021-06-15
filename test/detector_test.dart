@@ -1,12 +1,11 @@
-
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:iirjdart/butterworth.dart';
 
 void main() {
-  final String prefix="test/test_results/detector/";
+  final String prefix = "test/test_results/detector/";
 
   test("detect ECG's heartbeat", () async {
     Butterworth butterworth = new Butterworth();
@@ -22,18 +21,17 @@ void main() {
     final sinkHr = fileHr.openWrite();
 
     final ecgFile = File("test/test_resources/ecg.dat");
-    final ecgLines = ecgFile.openRead()
-      .transform(Utf8Decoder())
-      .transform(LineSplitter());
+    final ecgLines =
+        ecgFile.openRead().transform(Utf8Decoder()).transform(LineSplitter());
 
     double max = 0;
-    double t1=0,t2=0;
+    double t1 = 0, t2 = 0;
     int notDet = 0;
     double time = 0;
     int ignore = 100;
     int sampleno = 0;
 
-    await for(String line in ecgLines) {
+    await for (String line in ecgLines) {
       // let's do an impulse response
       double v = 0;
       time = time + 1.0 / 125.0;

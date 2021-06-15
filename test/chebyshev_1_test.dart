@@ -1,12 +1,10 @@
-
 import 'dart:io';
 
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:iirjdart/chebyshev_1.dart';
 
 void main() {
-  group("ChebushevI Test", ()
-  {
+  group("ChebushevI Test", () {
     final double ripple = 0.1; // db
     final String prefix = "test/test_results/chebyshevI/";
 
@@ -21,8 +19,7 @@ void main() {
       // let's do an impulse response
       for (int i = 0; i < 500; i++) {
         double v = 0;
-        if (i == 10)
-          v = 1;
+        if (i == 10) v = 1;
         v = chebyshevI.filter(v);
         sink.writeln("$v");
       }
@@ -45,8 +42,7 @@ void main() {
       // let's do an impulse response
       for (int i = 0; i < 500; i++) {
         double v = 0;
-        if (i == 10)
-          v = 1;
+        if (i == 10) v = 1;
         v = chebyshevI.filter(v);
         sink.writeln("$v");
       }
@@ -69,8 +65,7 @@ void main() {
       // let's do an impulse response
       for (int i = 0; i < 500; i++) {
         double v = 0;
-        if (i == 10)
-          v = 1;
+        if (i == 10) v = 1;
         v = chebyshevI.filter(v);
         sink.writeln("$v");
       }
@@ -93,8 +88,7 @@ void main() {
       // let's do an impulse response
       for (int i = 0; i < 500; i++) {
         double v = 0;
-        if (i == 10)
-          v = 1;
+        if (i == 10) v = 1;
         v = chebyshevI.filter(v);
         sink.writeln("$v");
       }
