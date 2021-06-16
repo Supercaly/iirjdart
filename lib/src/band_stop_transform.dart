@@ -1,4 +1,3 @@
-
 import 'dart:math' as math;
 
 import 'package:complex/complex.dart';
@@ -9,14 +8,15 @@ import 'package:iirjdart/src/pole_zero_pair.dart';
 
 /// Transforms from an analogue lowpass filter to a digital bandstop filter
 class BandStopTransform {
-  double _wc;
-  double _wc2;
-  double _a;
-  double _b;
-  double _a2;
-  double _b2;
+  late double _wc;
+  late double _wc2;
+  late double _a;
+  late double _b;
+  late double _a2;
+  late double _b2;
 
-  BandStopTransform(double fc, double fw, LayoutBase digital, LayoutBase analog) {
+  BandStopTransform(
+      double fc, double fw, LayoutBase digital, LayoutBase analog) {
     digital.reset();
 
     double ww = 2 * math.pi * fw;
@@ -25,13 +25,10 @@ class BandStopTransform {
     _wc = _wc2 + ww;
 
     // this is crap
-    if (_wc2 < 1e-8)
-      _wc2 = 1e-8;
-    if (_wc > math.pi - 1e-8)
-      _wc = math.pi - 1e-8;
+    if (_wc2 < 1e-8) _wc2 = 1e-8;
+    if (_wc > math.pi - 1e-8) _wc = math.pi - 1e-8;
 
-    _a = math.cos((_wc + _wc2) * .5) /
-      math.cos((_wc - _wc2) * .5);
+    _a = math.cos((_wc + _wc2) * .5) / math.cos((_wc - _wc2) * .5);
     _b = math.tan((_wc - _wc2) * .5);
     _a2 = _a * _a;
     _b2 = _b * _b;
@@ -63,7 +60,7 @@ class BandStopTransform {
     if (c.isInfinite)
       c = new Complex(-1);
     else
-      c = (Complex(1) +c) / (Complex(1) - c); // bilinear
+      c = (Complex(1) + c) / (Complex(1) - c); // bilinear
 
     Complex u = new Complex(0);
     u = MathSupplement.addmul(u, 4 * (_b2 + _a2 - 1), c);
@@ -85,5 +82,4 @@ class BandStopTransform {
 
     return new ComplexPair(u / d, v / d);
   }
-
 }

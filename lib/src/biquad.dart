@@ -1,4 +1,3 @@
-
 import 'dart:math' as math;
 import 'package:complex/complex.dart';
 import 'package:iirjdart/src/biquad_pole_state.dart';
@@ -7,12 +6,12 @@ import 'package:iirjdart/src/pole_zero_pair.dart';
 
 /// Contains the coefficients of a 2nd order digital filter with two poles and two zeros
 class Biquad {
-  double _a0;
-  double _a1;
-  double _a2;
-  double _b1;
-  double _b2;
-  double _b0;
+  late double _a0;
+  late double _a1;
+  late double _a2;
+  late double _b1;
+  late double _b2;
+  late double _b0;
 
   double get a0 => _a0;
   double get a1 => _a1;
@@ -54,8 +53,8 @@ class Biquad {
     return ch / cbot;
   }
 
-  void setCoefficients(double a0, double a1, double a2,
-    double b0, double b1, double b2) {
+  void setCoefficients(
+      double a0, double a1, double a2, double b0, double b1, double b2) {
     _a0 = a0;
     _a1 = a1 / a0;
     _a2 = a2 / a0;
@@ -74,18 +73,15 @@ class Biquad {
     setCoefficients(a0, a1, a2, b0, b1, b2);
   }
 
-  void setTwoPole(Complex pole1, Complex zero1,
-    Complex pole2, Complex zero2) {
+  void setTwoPole(Complex pole1, Complex zero1, Complex pole2, Complex zero2) {
     double a0 = 1;
     double a1;
     double a2;
 
     if (pole1.imaginary != 0) {
-
       a1 = -2 * pole1.real;
       a2 = pole1.abs() * pole1.abs();
     } else {
-
       a1 = -(pole1.real + pole2.real);
       a2 = pole1.real * pole2.real;
     }
@@ -95,11 +91,9 @@ class Biquad {
     double b2;
 
     if (zero1.imaginary != 0) {
-
       b1 = -2 * zero1.real;
       b2 = zero1.abs() * zero1.abs();
     } else {
-
       b1 = -(zero1.real + zero2.real);
       b2 = zero1.real * zero2.real;
     }
@@ -122,13 +116,12 @@ class Biquad {
     _b2 *= scale;
   }
 
-
   void setPoleZeroPair(PoleZeroPair pair) {
     if (pair.isSinglePole) {
       setOnePole(pair.poles.first, pair.zeros.first);
     } else {
-      setTwoPole(pair.poles.first, pair.zeros.first,
-        pair.poles.second, pair.zeros.second);
+      setTwoPole(pair.poles.first, pair.zeros.first, pair.poles.second,
+          pair.zeros.second);
     }
   }
 }

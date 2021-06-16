@@ -1,4 +1,3 @@
-
 import 'dart:math' as math;
 
 import 'package:complex/complex.dart';
@@ -13,7 +12,9 @@ import 'package:iirjdart/src/low_pass_transform.dart';
 class _AnalogLowPass extends LayoutBase {
   int _nPoles;
 
-  _AnalogLowPass(int nPoles): super(nPoles) {
+  _AnalogLowPass(int nPoles)
+      : _nPoles = nPoles,
+        super(nPoles) {
     _nPoles = nPoles;
     setNormal(0, 1);
   }
@@ -23,12 +24,12 @@ class _AnalogLowPass extends LayoutBase {
     double n2 = (2 * _nPoles).toDouble();
     int pairs = _nPoles ~/ 2;
     for (int i = 0; i < pairs; ++i) {
-      Complex c = Complex.polar(1.0, math.pi / 2.0 + (2 * i + 1) * math.pi / n2);
-      addPoleZeroConjugatePairs(c, Complex.INFINITY);
+      Complex c =
+          Complex.polar(1.0, math.pi / 2.0 + (2 * i + 1) * math.pi / n2);
+      addPoleZeroConjugatePairs(c, Complex.infinity);
     }
 
-    if ((_nPoles & 1) == 1)
-      add( Complex(-1), Complex.INFINITY);
+    if ((_nPoles & 1) == 1) add(Complex(-1), Complex.infinity);
   }
 }
 
@@ -40,7 +41,6 @@ class _AnalogLowPass extends LayoutBase {
 ///   butterworth.bandPass(2,250,50,5);
 /// ```
 class Butterworth extends Cascade {
-
   /// Butterworth Low-pass filter.
   ///
   /// Params:
@@ -48,15 +48,11 @@ class Butterworth extends Cascade {
   /// * sampleRate - The sampling rate of the system
   /// * cutoffFrequency - the cutoff frequency
   /// * directFormType - The filter topology. Default direct_form_II
-  void lowPass(
-    int order,
-    double sampleRate,
-    double cutoffFrequency,
-    [int directFormType = DirectFormAbstract.direct_form_II]
-    ) {
-    _AnalogLowPass analogProto =  _AnalogLowPass(order);
+  void lowPass(int order, double sampleRate, double cutoffFrequency,
+      [int directFormType = DirectFormAbstract.direct_form_II]) {
+    _AnalogLowPass analogProto = _AnalogLowPass(order);
     analogProto.design();
-    LayoutBase digitalProto =  LayoutBase(order);
+    LayoutBase digitalProto = LayoutBase(order);
     LowPassTransform(cutoffFrequency / sampleRate, digitalProto, analogProto);
     setLayout(digitalProto, directFormType);
   }
@@ -68,15 +64,11 @@ class Butterworth extends Cascade {
   /// * sampleRate - Sampling rate of the system
   /// * cutoffFrequency - Cutoff of the system
   /// * directFormType - The filter topology. Default direct_form_II
-  void highPass(
-    int order,
-    double sampleRate,
-    double cutoffFrequency,
-    [int directFormType = DirectFormAbstract.direct_form_II]
-    ) {
-    _AnalogLowPass analogProto =  _AnalogLowPass(order);
+  void highPass(int order, double sampleRate, double cutoffFrequency,
+      [int directFormType = DirectFormAbstract.direct_form_II]) {
+    _AnalogLowPass analogProto = _AnalogLowPass(order);
     analogProto.design();
-    LayoutBase digitalProto =  LayoutBase(order);
+    LayoutBase digitalProto = LayoutBase(order);
     HighPassTransform(cutoffFrequency / sampleRate, digitalProto, analogProto);
     setLayout(digitalProto, directFormType);
   }
@@ -89,17 +81,14 @@ class Butterworth extends Cascade {
   /// * centerFrequency - Center frequency
   /// * widthFrequency - Width of the notch
   /// * directFormType - The filter topology. Default direct_form_II
-  void bandStop(
-    int order,
-    double sampleRate,
-    double centerFrequency,
-    double widthFrequency,
-    [int directFormType = DirectFormAbstract.direct_form_II]
-    ) {
-    _AnalogLowPass analogProto =  _AnalogLowPass(order);
+  void bandStop(int order, double sampleRate, double centerFrequency,
+      double widthFrequency,
+      [int directFormType = DirectFormAbstract.direct_form_II]) {
+    _AnalogLowPass analogProto = _AnalogLowPass(order);
     analogProto.design();
-    LayoutBase digitalProto =  LayoutBase(order * 2);
-    BandStopTransform(centerFrequency / sampleRate, widthFrequency / sampleRate, digitalProto, analogProto);
+    LayoutBase digitalProto = LayoutBase(order * 2);
+    BandStopTransform(centerFrequency / sampleRate, widthFrequency / sampleRate,
+        digitalProto, analogProto);
     setLayout(digitalProto, directFormType);
   }
 
@@ -111,17 +100,14 @@ class Butterworth extends Cascade {
   /// * centerFrequency - Center frequency
   /// * widthFrequency - Width of the notch
   /// * directFormType - The filter topology. Default direct_form_II
-  void bandPass(
-    int order,
-    double sampleRate,
-    double centerFrequency,
-    double widthFrequency,
-    [int directFormType = DirectFormAbstract.direct_form_II]
-    ) {
-    _AnalogLowPass analogProto =  _AnalogLowPass(order);
+  void bandPass(int order, double sampleRate, double centerFrequency,
+      double widthFrequency,
+      [int directFormType = DirectFormAbstract.direct_form_II]) {
+    _AnalogLowPass analogProto = _AnalogLowPass(order);
     analogProto.design();
-    LayoutBase digitalProto =  LayoutBase(order * 2);
-    BandPassTransform(centerFrequency / sampleRate, widthFrequency / sampleRate, digitalProto, analogProto);
+    LayoutBase digitalProto = LayoutBase(order * 2);
+    BandPassTransform(centerFrequency / sampleRate, widthFrequency / sampleRate,
+        digitalProto, analogProto);
     setLayout(digitalProto, directFormType);
   }
 }

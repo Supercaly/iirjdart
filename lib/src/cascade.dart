@@ -1,4 +1,3 @@
-
 import 'dart:math' as math;
 
 import 'package:complex/complex.dart';
@@ -14,7 +13,6 @@ import 'package:iirjdart/src/pole_zero_pair.dart';
 /// filter stages as a sequence of 2nd order filters and the states
 /// of the 2nd order filters which also imply if it's direct form I or II
 class Cascade {
-
   // coefficients
   List<Biquad> _biquads;
 
@@ -34,14 +32,14 @@ class Cascade {
     return _biquads[index];
   }
 
-  Cascade():
-    _numBiquads = 0,
-    _biquads = null,
-    _states = null;
+  Cascade()
+      : _numBiquads = 0,
+        _numPoles = 0,
+        _biquads = [],
+        _states = [];
 
   void reset() {
-    for (int i = 0; i < _numBiquads; i++)
-      _states[i].reset();
+    for (int i = 0; i < _numBiquads; i++) _states[i].reset();
   }
 
   double filter(double _in) {
@@ -76,10 +74,10 @@ class Cascade {
     return ch / cbot;
   }
 
-   void applyScale(double scale) {
+  void applyScale(double scale) {
     // For higher order filters it might be helpful
     // to spread this factor between all the stages.
-    if (_biquads.length>0) {
+    if (_biquads.length > 0) {
       _biquads[0].applyScale(scale);
     }
   }
@@ -87,27 +85,24 @@ class Cascade {
   void setLayout(LayoutBase proto, int filterTypes) {
     _numPoles = proto.getNumPoles();
     _numBiquads = (_numPoles + 1) ~/ 2;
-    _biquads = List(_numBiquads);
+
     switch (filterTypes) {
       case DirectFormAbstract.direct_form_I:
-        _states = List(_numBiquads);
-        for (int i = 0; i < _numBiquads; i++) {
-          _states[i] = DirectFormI();
-        }
+        _states = List.generate(_numBiquads, (_) => DirectFormI());
         break;
       case DirectFormAbstract.direct_form_II:
       default:
-        _states = List(_numBiquads);
-        for (int i = 0; i < _numBiquads; i++) {
-          _states[i] = DirectFormII();
-        }
+        _states = List.generate(_numBiquads, (_) => DirectFormII());
         break;
     }
-    for (int i = 0; i < _numBiquads; ++i) {
+    _biquads = List.generate(_numBiquads, (i) {
       PoleZeroPair p = proto.getPair(i);
-      _biquads[i] = Biquad();
-      _biquads[i].setPoleZeroPair(p);
-    }
-    applyScale(proto.normalGain / ((response(proto.normalW / (2 * math.pi)))).abs());
+      final biquad = Biquad();
+      biquad.setPoleZeroPair(p);
+      return biquad;
+    });
+
+    applyScale(
+        proto.normalGain / ((response(proto.normalW / (2 * math.pi)))).abs());
   }
 }
