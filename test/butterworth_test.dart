@@ -1,13 +1,10 @@
-
 import 'dart:io';
 
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:iirjdart/butterworth.dart';
 
 void main() {
-
-  group("Butterworth Test", ()
-  {
+  group("Butterworth Test", () {
     final String prefix = "test/test_results/butterworth/";
 
     test("low pass", () async {
@@ -21,8 +18,7 @@ void main() {
       // let's do an impulse response
       for (int i = 0; i < 500; i++) {
         double v = 0;
-        if (i == 10)
-          v = 1;
+        if (i == 10) v = 1;
         v = butterworth.filter(v);
         sink.writeln("$v");
       }
@@ -45,8 +41,7 @@ void main() {
       // let's do an impulse response
       for (int i = 0; i < 500; i++) {
         double v = 0;
-        if (i == 10)
-          v = 1;
+        if (i == 10) v = 1;
         v = butterworth.filter(v);
         sink.writeln("$v");
       }
@@ -69,8 +64,7 @@ void main() {
       // let's do an impulse response
       for (int i = 0; i < 500; i++) {
         double v = 0;
-        if (i == 10)
-          v = 1;
+        if (i == 10) v = 1;
         v = butterworth.filter(v);
         sink.writeln("$v");
       }
@@ -116,8 +110,7 @@ void main() {
       // let's do an impulse response
       for (int i = 0; i < 500; i++) {
         double v = 0;
-        if (i == 10)
-          v = 1;
+        if (i == 10) v = 1;
         v = butterworth.filter(v);
         sink.writeln("$v");
       }
