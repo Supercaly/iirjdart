@@ -1,4 +1,3 @@
-
 import 'package:complex/complex.dart';
 import 'package:iirjdart/src/complex_pair.dart';
 import 'package:iirjdart/src/pole_zero_pair.dart';
@@ -6,23 +5,22 @@ import 'package:iirjdart/src/pole_zero_pair.dart';
 /// Digital/analogue filter coefficient storage space organising the
 /// storage as PoleZeroPairs so that we have as always a 2nd order filter
 class LayoutBase {
+  late int _numPoles;
+  late List<PoleZeroPair?> _pair;
+  late double _normalW;
+  late double _normalGain;
 
-  int _numPoles;
-  List _pair;
-  double _normalW;
-  double _normalGain;
-
-  LayoutBase.fromPairs(List pairs) {
-  _numPoles = pairs.length * 2;
-  _pair = pairs;
+  LayoutBase.fromPairs(List<PoleZeroPair?> pairs) {
+    _numPoles = pairs.length * 2;
+    _pair = pairs;
   }
 
   LayoutBase(int numPoles) {
     _numPoles = 0;
     if ((numPoles % 2) == 1) {
-      _pair = List(numPoles ~/ 2 + 1);
+      _pair = List.filled(numPoles ~/ 2 + 1, null);
     } else {
-      _pair = List(numPoles ~/ 2);
+      _pair = List.filled(numPoles ~/ 2, null);
     }
   }
 
@@ -43,20 +41,18 @@ class LayoutBase {
     if (pole == null) print("LayoutBase addConj() pole == null");
     if (zero == null) print("LayoutBase addConj() zero == null");
     if (_pair == null) print("LayoutBase addConj() m_pair == null");
-    _pair[_numPoles ~/ 2] = PoleZeroPair(
-      pole, zero,
-      pole.conjugate(), zero.conjugate()
-    );
+    _pair[_numPoles ~/ 2] =
+        PoleZeroPair(pole, zero, pole.conjugate(), zero.conjugate());
     _numPoles += 2;
   }
 
   void addPairs(ComplexPair poles, ComplexPair zeros) {
-    _pair[_numPoles ~/ 2] = new PoleZeroPair(poles.first, zeros.first,
-      poles.second, zeros.second);
+    _pair[_numPoles ~/ 2] =
+        new PoleZeroPair(poles.first, zeros.first, poles.second, zeros.second);
     _numPoles += 2;
   }
 
-  PoleZeroPair getPair(int pairIndex) => _pair[pairIndex];
+  PoleZeroPair getPair(int pairIndex) => _pair[pairIndex]!;
 
   double get normalW => _normalW;
 

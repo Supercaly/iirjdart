@@ -1,4 +1,3 @@
-
 import 'dart:math' as math;
 
 import 'package:complex/fastmath.dart';
@@ -15,14 +14,15 @@ import 'package:iirjdart/src/math_supplement.dart';
 class _AnalogLowPass extends LayoutBase {
   int nPoles;
 
-  _AnalogLowPass(int _nPoles):
-    nPoles = _nPoles,
-    super(_nPoles);
+  _AnalogLowPass(int _nPoles)
+      : nPoles = _nPoles,
+        super(_nPoles);
 
   void design(double rippleDb) {
     reset();
 
-    double eps = math.sqrt(1.0 / math.exp(-rippleDb * 0.1 * MathSupplement.doubleLn10) - 1);
+    double eps = math
+        .sqrt(1.0 / math.exp(-rippleDb * 0.1 * MathSupplement.doubleLn10) - 1);
     double v0 = MathSupplement.asinh(1 / eps) / nPoles;
     double sinhV0 = -sinh(v0);
     double coshV0 = cosh(v0);
@@ -41,7 +41,7 @@ class _AnalogLowPass extends LayoutBase {
       add(Complex(sinhV0, 0), Complex(double.infinity));
       setNormal(0, 1);
     } else {
-      setNormal(0, math.pow(10, -rippleDb / 20.0));
+      setNormal(0, math.pow(10, -rippleDb / 20.0).toDouble());
     }
   }
 }
@@ -63,12 +63,8 @@ class ChebyshevI extends Cascade {
   /// * rippleDb - pass-band ripple in decibel sensible value: 1dB
   /// * directFormType - The filter topology. Default dirrect_form_II
   void lowPass(
-    int order,
-    double sampleRate,
-    double cutoffFrequency,
-    double rippleDb,
-    [int directFormType = DirectFormAbstract.direct_form_II]
-    ) {
+      int order, double sampleRate, double cutoffFrequency, double rippleDb,
+      [int directFormType = DirectFormAbstract.direct_form_II]) {
     _AnalogLowPass analogProto = _AnalogLowPass(order);
     analogProto.design(rippleDb);
     LayoutBase digitalProto = LayoutBase(order);
@@ -85,12 +81,8 @@ class ChebyshevI extends Cascade {
   /// * rippleDb - pass-band ripple in decibel sensible value: 1dB
   /// * directFormType - The filter topology. Default direct_form_II
   void highPass(
-    int order,
-    double sampleRate,
-    double cutoffFrequency,
-    double rippleDb,
-    [int directFormType = DirectFormAbstract.direct_form_II]
-    ) {
+      int order, double sampleRate, double cutoffFrequency, double rippleDb,
+      [int directFormType = DirectFormAbstract.direct_form_II]) {
     _AnalogLowPass analogProto = _AnalogLowPass(order);
     analogProto.design(rippleDb);
     LayoutBase digitalProto = LayoutBase(order);
@@ -107,18 +99,14 @@ class ChebyshevI extends Cascade {
   /// * widthFrequency - Width of the notch
   /// * rippleDb - pass-band ripple in decibel sensible value: 1dB
   /// * directFormType - The filter topology. Default direct_form_II
-  void bandStop(
-    int order,
-    double sampleRate,
-    double centerFrequency,
-    double widthFrequency,
-    double rippleDb,
-    [int directFormType = DirectFormAbstract.direct_form_II]
-    ) {
+  void bandStop(int order, double sampleRate, double centerFrequency,
+      double widthFrequency, double rippleDb,
+      [int directFormType = DirectFormAbstract.direct_form_II]) {
     _AnalogLowPass analogProto = _AnalogLowPass(order);
     analogProto.design(rippleDb);
     LayoutBase digitalProto = LayoutBase(order * 2);
-    BandStopTransform(centerFrequency / sampleRate, widthFrequency / sampleRate, digitalProto, analogProto);
+    BandStopTransform(centerFrequency / sampleRate, widthFrequency / sampleRate,
+        digitalProto, analogProto);
     setLayout(digitalProto, directFormType);
   }
 
@@ -131,18 +119,14 @@ class ChebyshevI extends Cascade {
   /// * widthFrequency - Width of the notch
   /// * rippleDb - pass-band ripple in decibel sensible value: 1dB
   /// * directFormType - The filter topology. Default direct_form_II
-  void bandPass(
-    int order,
-    double sampleRate,
-    double centerFrequency,
-    double widthFrequency,
-    double rippleDb,
-    [int directFormType = DirectFormAbstract.direct_form_II]
-    ) {
+  void bandPass(int order, double sampleRate, double centerFrequency,
+      double widthFrequency, double rippleDb,
+      [int directFormType = DirectFormAbstract.direct_form_II]) {
     _AnalogLowPass analogProto = _AnalogLowPass(order);
     analogProto.design(rippleDb);
     LayoutBase digitalProto = LayoutBase(order * 2);
-    BandPassTransform(centerFrequency / sampleRate, widthFrequency / sampleRate, digitalProto, analogProto);
+    BandPassTransform(centerFrequency / sampleRate, widthFrequency / sampleRate,
+        digitalProto, analogProto);
     setLayout(digitalProto, directFormType);
   }
 }

@@ -1,4 +1,3 @@
-
 import 'dart:math' as math;
 
 import 'package:complex/complex.dart';
@@ -9,13 +8,14 @@ import 'package:iirjdart/src/pole_zero_pair.dart';
 
 /// Transforms from an analogue bandpass filter to a digital bandstop filter
 class BandPassTransform {
-  double _wc2;
-  double _wc;
-  double _a, _b;
-  double _a2, _b2;
-  double _ab, _ab_2;
+  late double _wc2;
+  late double _wc;
+  late double _a, _b;
+  late double _a2, _b2;
+  late double _ab, _ab_2;
 
-  BandPassTransform(double fc, double fw, LayoutBase digital, LayoutBase analog) {
+  BandPassTransform(
+      double fc, double fw, LayoutBase digital, LayoutBase analog) {
     digital.reset();
 
     double ww = 2 * math.pi * fw;
@@ -25,10 +25,8 @@ class BandPassTransform {
     _wc = _wc2 + ww;
 
     // what is this crap?
-    if (_wc2 < 1e-8)
-      _wc2 = 1e-8;
-    if (_wc > math.pi - 1e-8)
-      _wc = math.pi - 1e-8;
+    if (_wc2 < 1e-8) _wc2 = 1e-8;
+    if (_wc > math.pi - 1e-8) _wc = math.pi - 1e-8;
 
     _a = math.cos((_wc + _wc2) * 0.5) / math.cos((_wc - _wc2) * 0.5);
     _b = 1 / math.tan((_wc - _wc2) * 0.5);
@@ -57,8 +55,10 @@ class BandPassTransform {
 
     double wn = analog.normalW;
     digital.setNormal(
-      2 * math.atan(math.sqrt(math.tan((_wc + wn) * 0.5)
-        * math.tan((_wc2 + wn) * 0.5))), analog.normalGain);
+        2 *
+            math.atan(math.sqrt(
+                math.tan((_wc + wn) * 0.5) * math.tan((_wc2 + wn) * 0.5))),
+        analog.normalGain);
   }
 
   ComplexPair transform(Complex c) {

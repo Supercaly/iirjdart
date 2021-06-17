@@ -1,13 +1,11 @@
-
 import 'package:iirjdart/src/biquad.dart';
 import 'package:iirjdart/src/direct_form.dart';
 
 /// Implementation of a Direct Form II filter with its states. The coefficients
 /// are supplied from the outside.
 class DirectFormII extends DirectFormAbstract {
-
-  double _v1; // v[-1]
-  double _v2; // v[-2]
+  late double _v1; // v[-1]
+  late double _v2; // v[-2]
 
   DirectFormII() {
     reset();
@@ -22,8 +20,7 @@ class DirectFormII extends DirectFormAbstract {
   @override
   double process1(double _in, Biquad s) {
     if (s != null) {
-      double w = _in
-      -s.a1 * _v1 - s.a2 * _v2;
+      double w = _in - s.a1 * _v1 - s.a2 * _v2;
       double out = s.b0 * w + s.b1 * _v1 + s.b2 * _v2;
 
       _v2 = _v1;

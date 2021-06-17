@@ -1,12 +1,11 @@
-
 import 'package:complex/complex.dart';
 
 /// A complex pair
 class ComplexPair {
-  Complex first;
-  Complex second;
+  late Complex first;
+  late Complex second;
 
-  ComplexPair(Complex c1, [Complex c2]) {
+  ComplexPair(Complex c1, [Complex? c2]) {
     first = c1;
     second = c2 ?? Complex(0.0, 0.0);
   }
@@ -21,9 +20,7 @@ class ComplexPair {
     if (first.imaginary != 0)
       return isConjugate;
     else
-      return second.imaginary == 0 &&
-        second.real != 0 &&
-        first.real != 0;
+      return second.imaginary == 0 && second.real != 0 && first.real != 0;
   }
 
   bool get isNan => first.isNaN || second.isNaN;
