@@ -2,7 +2,7 @@ name: iirjdart
 description: >-
   An IIR filter library written in Dart.
   Highpass, lowpass, bandpass and bandstop as Butterworth, Bessel and Chebyshev Type I/II.
-version: 0.0.1
+version: 0.1.0
 homepage: https://github.com/Supercaly/iirj_dart
 repository: https://github.com/Supercaly/iirj_dart
 issue_tracker: https://github.com/Supercaly/iirj_dart/issues
